@@ -410,13 +410,14 @@ get_archive() {
             red_log "[-] Failed to download $2"
             exit 1
     fi
-    if [[ $5 == "Bundle" ]]; then
+    if [[ $4 == "Bundle" ]]; then
             green_log "[+] Merge splits apk to standalone apk"
             java -jar $APKEditor m -i ./download/$2.apkm -o ./download/$2.apk > /dev/null 2>&1
-    elif [[ $5 == "Bundle_extract" ]]; then
+    elif [[ $4 == "Bundle_extract" ]]; then
             unzip "./download/$base_apk" -d "./download/$(basename "$base_apk" .apkm)" > /dev/null 2>&1
     fi
         return 0
+	}
 #################################################
 
 # Patching apps with Revanced CLI:
