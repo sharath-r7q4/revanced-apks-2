@@ -1,17 +1,17 @@
 ### Actively Used Libraries
-#Morphe
+##Morphe
 
 [Patches](https://github.com/MorpheApp/morphe-patches) - [GPL-3.0](https://github.com/MorpheApp/morphe-patches/blob/main/LICENSE)
 
 [CLI](https://github.com/MorpheApp/morphe-cli) - [GPL-3.0](https://github.com/MorpheApp/morphe-cli/blob/main/LICENSE)
 
 
-#Crimera
+##Crimera
 
 [Patches](https://github.com/crimera/piko) - [GPL-3.0](https://github.com/crimera/piko/blob/main/LICENSE)
 
 
-#Standalone
+##Standalone
 
 [pup](https://github.com/ericchiang/pup) - [MIT](https://github.com/ericchiang/pup/blob/master/LICENSE)
 
