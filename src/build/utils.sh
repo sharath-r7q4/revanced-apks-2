@@ -397,10 +397,10 @@ patch() {
 	if [ -f "./download/$1.apk" ]; then
 		local p b m ks a pu opt force
 		if [ "$3" = inotia ]; then
-			p="patch " b="-p *.rvp" m="" a="" ks=" --keystore=./src/_ks.keystore" pu="--purge=true" opt="--legacy-options=./src/options/$2.json" force=" --force"
+			p="patch " b="-p *.rvp" m="" a="" ks=" --keystore=./src/ks.keystore" pu="--purge=true" opt="--legacy-options=./src/options/$2.json" force=" --force"
 			echo "Patching with Revanced-cli inotia"
 		elif [ "$3" = morphe ]; then
-			p="patch " b="-p *.mpp" m="" a="" ks=" --keystore=./src/morphe.keystore" pu="--purge=true" opt="--options-file ./src/options/$2.json" force=" --force --continue-on-error"
+			p="patch " b="-p *.mpp" m="" a="" ks=" --keystore=./src/ks.keystore" pu="--purge=true" opt="--options-file ./src/options/$2.json" force=" --force --continue-on-error"
 			echo "Patching with Morphe"
 		else
 			if [[ $(ls revanced-cli-*.jar) =~ revanced-cli-([0-9]+) ]]; then
@@ -415,10 +415,10 @@ patch() {
 					p="patch " b="--patch-bundle *patch*.jar" m="--merge *integration*.apk " a="" ks=" --keystore=./src/ks.keystore" pu="--purge=true" opt="--options=./src/options/$2.json "
 					echo "Patching with Revanced-cli version 4"
 				elif [ $num -eq 3 ]; then
-					p="patch " b="--patch-bundle *patch*.jar" m="--merge *integration*.apk " a="" ks=" --keystore=./src/_ks.keystore" pu="--purge=true" opt="--options=./src/options/$2.json "
+					p="patch " b="--patch-bundle *patch*.jar" m="--merge *integration*.apk " a="" ks=" --keystore=./src/ks.keystore" pu="--purge=true" opt="--options=./src/options/$2.json "
 					echo "Patching with Revanced-cli version 3"
 				elif [ $num -eq 2 ]; then
-					p="" b="--bundle *patch*.jar" m="--merge *integration*.apk " a="--apk " ks=" --keystore=./src/_ks.keystore" pu="--clean" opt="--options=./src/options/$2.json " force=" --experimental"
+					p="" b="--bundle *patch*.jar" m="--merge *integration*.apk " a="--apk " ks=" --keystore=./src/ks.keystore" pu="--clean" opt="--options=./src/options/$2.json " force=" --experimental"
 					echo "Patching with Revanced-cli version 2"
 				fi
 			fi
@@ -426,7 +426,7 @@ patch() {
 		if [[ "$3" = inotia || "$3" = morphe ]]; then
 			unset CI GITHUB_ACTION GITHUB_ACTIONS GITHUB_ACTOR GITHUB_ENV GITHUB_EVENT_NAME GITHUB_EVENT_PATH GITHUB_HEAD_REF GITHUB_JOB GITHUB_REF GITHUB_REPOSITORY GITHUB_RUN_ID GITHUB_RUN_NUMBER GITHUB_SHA GITHUB_WORKFLOW GITHUB_WORKSPACE RUN_ID RUN_NUMBER
 		fi
-		eval java -jar *cli*.jar $p$b $m$opt --out=./release/$1-$2.apk$excludePatches$includePatches$ks $pu$force $a./download/$1.apk
+		eval java -jar *cli*.jar --keystore-entry-password=$KEYSTORE_PASS --keystore-password=$KEYSTORE_PASS --signer=$KEYSTORE_ALIAS --keystore-entry-alias=$KEYSTORE_ALIAS $p$b $m$opt --out=./release/$1-$2.apk$excludePatches$includePatches$ks $pu$force $a./download/$1.apk
   		unset version
 		unset lock_version
 		unset excludePatches
@@ -489,8 +489,9 @@ split_arch() {
 	if [ -f "./download/$1.apk" ]; then
 		eval java -jar *cli*.jar patch \
 		-p *.mpp $excludePatches$includePatches--options-file ./src/options/$2.json \
-		--striplibs ${archs[i]} --purge=true \
-		--keystore=./src/morphe.keystore --force \
+		--striplibs ${archs[i]} --purge=true 
+		--keystore-entry-password=$KEYSTORE_PASS --keystore-password=$KEYSTORE_PASS --signer=$KEYSTORE_ALIAS --keystore-entry-alias=$KEYSTORE_ALIAS \
+		--keystore=./src/ks.keystore --force \
 		--out=./release/$1-${archs[i]}-$2.apk\
 		./download/$1.apk
 	else
