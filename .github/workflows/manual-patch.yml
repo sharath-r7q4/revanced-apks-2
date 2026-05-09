@@ -18,6 +18,8 @@ on:
           - 'Morphe YouTube'
           - 'piko X'
           - 'piko Instagram'
+          - 'hoo-dles Proton VPN'
+          - 'hoo-dles Prime Video'
   workflow_call:
     inputs:
       org:
@@ -124,4 +126,78 @@ jobs:
         uses: ./.github/actions/release
         with:
          release_name: "Instagram-piko"
+      
+  patch_hoo-dles_protonvpn:
+    name: Patch hoo-dles(ProtonVPN)
+    if: ${{ github.event.inputs.org == 'hoo-dles Proton VPN' || inputs.org == 'hoo-dles Proton VPN' || inputs.org == 'all' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE }}" | base64 --decode > src/ks.keystore
+          echo "${{ secrets.KEYSTORE_P12 }}" | base64 --decode > ks-p12.keystore
+
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-morphe
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-morphe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
+          KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          GITHUB_REPOSITORY: $GITHUB_REPOSITORY
+        if: steps.check-gh-morphe.outputs.internet_error == '0'
+        run: bash src/build/build.sh "morphe-patches" "hoo-dles"  "ch.protonvpn.android" "protonvpn" "proton-technologies-ag/protonvpn-secure-and-free-vpn/proton-vpn-fast-secure-vpn"
+      - name: Releasing APK files
+        id: releasemorphe
+        if: steps.check-gh-morphe.outputs.internet_error == '0'
+        uses: ./.github/actions/release
+        with:
+         release_name: "Proton-VPN-hoo-dles"
+
+  patch_hoo-dles_prime-video:
+    name: Patch hoo-dles(ProtonVPN)
+    if: ${{ github.event.inputs.org == 'hoo-dles Prime Video' || inputs.org == 'hoo-dles Prime Video' || inputs.org == 'all' }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+      - name: Decode Keystore
+        run: |
+          echo "${{ secrets.KEYSTORE }}" | base64 --decode > src/ks.keystore
+          echo "${{ secrets.KEYSTORE_P12 }}" | base64 --decode > ks-p12.keystore
+
+      - name: Preparing to patch
+        uses: ./.github/actions/preparing
+      - name: Check github connection
+        id: check-gh-morphe
+        run: bash src/etc/connection.sh
+      - name: Patch apk
+        id: patch-morphe
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
+          KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          GITHUB_REPOSITORY: $GITHUB_REPOSITORY
+        if: steps.check-gh-morphe.outputs.internet_error == '0'
+        run: | 
+         export version="$(curl --silent 'https://www.apkmirror.com/apk/amazon-mobile-llc/amazon-prime-video/feed/' -H 'User-Agent: ' | grep -E '(title>|description>)' | tail -n +4 | sed -e 's/^[ \t]*//' | sed -e 's/<title>//' -e 's/<\/title>//' -e 's/<description>/  /' -e 's/<\/description>//' | head -n +1 | grep -oP '\d+\.\d+\.\d+')"
+         bash src/build/build.sh "morphe-patches" "hoo-dles"  "prime-video"  "com.amazon.avod.thirdpartyclient" "prime-video-arm64-v8a" "amazon-prime-video" "amazon-mobile-llc/amazon-prime-video/amazon-prime-video" "arm64-v8a"
+         
+      - name: Releasing APK files
+        id: releasemorphe
+        if: steps.check-gh-morphe.outputs.internet_error == '0'
+        uses: ./.github/actions/release
+        with:
+         release_name: "Prime-Video-hoo-dles"
+
       
