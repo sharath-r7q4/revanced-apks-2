@@ -90,7 +90,7 @@ jobs:
       - name: Patch apk
         id: patch-morphe
         if: steps.check-gh-morphe.outputs.internet_error == '0'
-        run: bash src/build/build.sh "piko" "crimera" "com.instagram.android" "instagram-arm64-v8a" "instagram/instagram-instagram/instagram" "apkpure" "Bundle_extract"
+        run: bash src/build/build.sh "piko" "crimera" "com.instagram.android" "instagram-arm64-v8a" "instagram-android/com.instagram.android" "apkpure" "Bundle_extract"
       - name: Releasing APK files
         id: releasemorphe
         if: steps.check-gh-morphe.outputs.internet_error == '0'
