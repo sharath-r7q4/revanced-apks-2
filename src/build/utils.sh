@@ -22,6 +22,7 @@ user_agent=$(wget -qO- https://www.whatismybrowser.com/guides/the-latest-user-ag
 # Colored output logs
 green_log() {
     echo -e "\e[32m$1\e[0m"
+	echo "$1" > build_log
 }
 red_log() {
     echo -e "\e[31m$1\e[0m"
@@ -64,7 +65,7 @@ dl_gh() {
             if [[ $url != *.asc ]]; then
               name=$(basename "$url")
               wget -q -O "$name" "$url"
-              green_log "[+] Downloading $name from $owner"
+              green_log "[+] Downloading $name from $owner
             fi
           fi
         fi
