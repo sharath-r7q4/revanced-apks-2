@@ -401,8 +401,8 @@ get_archive() {
 	else
 		local base_apk="$2.apk"
 	fi
-	url=$($5$3/$(curl $5$3/| pup 'a attr{href}' | grep $version | grep $6))
-	green_log "[+] Downloading $2 version: $version $4 $6"
+	url=$($5$1/$(curl $5$1/| pup 'a attr{href}' | grep $version | grep $3))
+	green_log "[+] Downloading $2 version: $version $4 $3"
 	req "$url" "$base_apk"
 	if [[ -f "./download/$base_apk" ]]; then
             green_log "[+] Successfully downloaded $2"
