@@ -1,6 +1,23 @@
+### Actively Used Libraries
+<details>
+  <summary>Morphe</summary>
 
+[Patches](https://github.com/MorpheApp/morphe-patches) - [GPL-3.0](https://github.com/MorpheApp/morphe-patches/blob/main/LICENSE)
 
-### ⚠️ Library, resources using in this repository:
+[CLI](https://github.com/MorpheApp/morphe-cli) - [GPL-3.0](https://github.com/MorpheApp/morphe-cli/blob/main/LICENSE)
+
+</details>
+
+<details>
+  <summary>crimera</summary>
+
+[Patches](https://github.com/crimera/piko) - [GPL-3.0](https://github.com/crimera/piko/blob/main/LICENSE)
+
+[Integrations](https://github.com/crimera/revanced-integrations) - [GPL-3.0](https://github.com/crimera/revanced-integrations/blob/main/LICENSE)
+
+</details>
+
+### Dormant Libraries, resources using in this repository:
 
 <details>
   <summary>Revanced</summary>
@@ -41,23 +58,6 @@
 
 </details>
 
-<details>
-  <summary>Morphe</summary>
-
-[Patches](https://github.com/MorpheApp/morphe-patches) - [GPL-3.0](https://github.com/MorpheApp/morphe-patches/blob/main/LICENSE)
-
-[CLI](https://github.com/MorpheApp/morphe-cli) - [GPL-3.0](https://github.com/MorpheApp/morphe-cli/blob/main/LICENSE)
-
-</details>
-
-<details>
-  <summary>crimera</summary>
-
-[Patches](https://github.com/crimera/piko) - [GPL-3.0](https://github.com/crimera/piko/blob/main/LICENSE)
-
-[Integrations](https://github.com/crimera/revanced-integrations) - [GPL-3.0](https://github.com/crimera/revanced-integrations/blob/main/LICENSE)
-
-</details>
 
 <details>
   <summary>kitadai31</summary>
@@ -119,7 +119,6 @@
 
 </details>
 
-[Markdown Badges](https://github.com/Ileriayo/markdown-badges) - [MIT](https://github.com/Ileriayo/markdown-badges/blob/master/LICENSE)
 
 [pup](https://github.com/ericchiang/pup) - [MIT](https://github.com/ericchiang/pup/blob/master/LICENSE)
 
@@ -127,10 +126,11 @@
 
 ---
 
-### ⚠️ Inspired by:
+### Inspired by:
 
 [@luxysiv](https://github.com/luxysiv/yt-revanced-nonroot) - [GPL-3.0](https://github.com/luxysiv/revanced-nonroot/blob/main/LICENSE)
 
 [revanced-build-template](https://github.com/n0k0m3/revanced-build-template) - [GPL-3.0](https://github.com/n0k0m3/revanced-build-template/blob/main/LICENSE)
 
-[revanced-magisk-module](https://github.com/j-hc/revanced-magisk-module) - [GPL-3.0](https://github.com/j-hc/revanced-magisk-module/blob/main/LICENSE)
+[revanced-magisk-module](https://github.com/j-hc/revanced-magisk-module) - [GPL-3.0](https://github.com/j-hc/revanced-magisk-module/blob/main/LICENSE)(previously based on,[Download Prime Video APKs from here] (https://github.com/sharath-r7q4/revanced-apks-legacy)
+ChatGPT
