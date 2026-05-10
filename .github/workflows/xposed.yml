@@ -35,28 +35,30 @@ jobs:
           KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
           KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
           GITHUB_REPOSITORY: $GITHUB_REPOSITORY
-          NEXT_VER_CODE: ${{ steps.next_ver_code.outputs.NEXT_VER_CODE }}
-          
-      - name: Get Files and Patch
+      - name: Get Files
         run: |
           export mver="$(curl -fL https://api.github.com/repos/revenge-mod/revenge-xposed/releases/latest  | jq .name)"
           export aver="$(curl https://apkcombo.com/discord/com.discord/download/apk | grep -oE '[0-9]+\.[0-9]+ - Stable' | sort -V | tail -n 1)"
           echo "[+] Downloading Revenge $mver"
-          wget -q --header="Authorization: $GITHUB_TOKEN" https://github.com/revenge-mod/revenge-xposed/releases/latest/download/app-release.apk
+          wget -q https://github.com/revenge-mod/revenge-xposed/releases/latest/download/app-release.apk
           echo '[+] Downloading APKEditor'
-          wget $(curl -fSL https://api.github.com/repos/REAndroid/APKEditor/releases/latest | jq -r '.assets[0].browser_download_url') -O apkeditor.jar
+          wget -q $(curl -fSL https://api.github.com/repos/REAndroid/APKEditor/releases/latest | jq -r '.assets[0].browser_download_url') -O apkeditor.jar
           echo '[+] Downloading LSPatch'
-          wget -q https://github.com/JingMatrix/LSPatch/releases/latest/download/app-release.apk
+          wget -q https://github.com/JingMatrix/LSPatch/releases/latest/download/lspatch.jar
           echo "[+] Downloadong Discord $aver"
-          wget -q "https://apkcombo.com$(curl https://apkcombo.com/discord/com.discord/download/apk | grep -Po '(?<=href=["\"])(?!https?://)[^"\"]+' | grep r2)" -o discord.apk
-
+          wget -q "https://apkcombo.com$(curl https://apkcombo.com/discord/com.discord/download/apk | grep -Po '(?<=href=["\"])(?!https?://)[^"\"]+' | grep r2)" -o discord.xapk
+      - name: Patch
+        run: |
+          java -jar apkeditor.jar m -i discord.xapk -o discord.apk
+          java -jar lspatch.jar discord.apk -m app-release.apk -l 2 -o build -k sign.keystore ${{ secrets.KEYSTORE_PASS }} ${{ secrets.KEYSTORE_ALIAS }} ${{ secrets.KEYSTORE_PASS }}
+          echo "Discord: $aver Revenge: $pver" > build_log.txt
     
       - name: Release
         uses: ncipollo/release-action@v1.21.0
         with:
          artifacts: |
           ./build/*.apk
-         name: FCL-CoD
-         tag: FCL-CoD
+         name: Discord-Revenge
+         tag: Discord-Revenge
          bodyFile: build_log.txt
          allowUpdates: true
