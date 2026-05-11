@@ -15,7 +15,7 @@ Just use GitHub Releases to find Apps
 ## Added custom manifest patches and LSPatch
 
 ### Notable Modifications to revanced part
-- Replaced keystore with personal keystore stored in secrets.
+- Replaced hardcoded keystore with keystore stored in secrets.
 - Redone scripts to be more universal and breaking out of hardcoded multiple bash script
 - Dedicated release for each apps with logs
 - Added suport for Archive.org apk repositories
