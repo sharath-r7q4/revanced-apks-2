@@ -60,7 +60,7 @@ morphe-youtube() {
 	get_patches_key "youtube-morphe"
 	get_apk "com.google.android.youtube" "youtube" "apk"
 	patch "youtube" "morphe" "morphe"
-
+}
 case "$1" in
     revenge-discord)
         revenge-discord
