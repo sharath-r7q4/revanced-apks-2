@@ -1,7 +1,8 @@
 #!/bin/bash
 source src/build/utils.sh
 get_deps() {
-  wget -q https://dl.google.com/android/repository/build-tools_r34-linux.zip -O build-tools.zip      wget -q $(curl -fsSL https://api.github.com/repos/REAndroid/APKEditor/releases/latest | jq -r '.assets[0].browser_download_url') -O apkeditor.jar
+  wget -q https://dl.google.com/android/repository/build-tools_r34-linux.zip -O build-tools.zip      
+  wget -q $(curl -fsSL https://api.github.com/repos/REAndroid/APKEditor/releases/latest | jq -r '.assets[0].browser_download_url') -O apkeditor.jar
   unzip -q build-tools.zip -d android-build-tools
   mv android-build-tools/android-14/lib/apksigner.jar apksigner.jar
 }
