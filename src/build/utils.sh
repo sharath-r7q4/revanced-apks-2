@@ -68,7 +68,7 @@ dl_gh() {
             if [[ $url != *.asc ]]; then
               name=$(basename "$url")
               wget -q -O "$name" "$url"
-              n_log "[+] Downloading $name from $owner - $tag"
+              green_log "[+] Downloading $name from $owner - $tag"
             fi
           fi
         fi
@@ -90,7 +90,7 @@ dl_gh() {
             if [[ "$3" == "latest" && "$names" == *dev* ]]; then
               continue
             fi
-            n_log "[+] Downloading $names from $2 - $tags"
+            green_log "[+] Downloading $names from $2 - $tags"
             wget -q -O "$names" $url
           fi
         done
@@ -126,7 +126,7 @@ dl_gl() {
   echo "$release" | jq -r '.assets.links[] | "\(.direct_asset_url // .url) \(.name)"' | \
     while read -r url name; do
       if [[ -n "$url" ]] && [[ "$url" != "null" ]] && [[ $url != *.asc ]]; then
-        n_log "[+] Downloading $name from $owner - $tag"
+        green_log "[+] Downloading $name from $owner - $tag"
         wget -q -O "$name" "$url"
       fi
     done
@@ -316,8 +316,8 @@ get_apk() {
 	unset prefer_version
 	export version
 
-	n_log "[+] Detected version: ${version:-latest} [$pkg_name]"
-	n_log "[+] Downloading $apk_name (type=$pkg_type arch=${arch:-any} dpi=$dpi)"
+	green_log "[+] Detected version: ${version:-latest} [$pkg_name]"
+	green_log "[+] Downloading $apk_name (type=$pkg_type arch=${arch:-any} dpi=$dpi)"
 
 	local version_href=""
 
