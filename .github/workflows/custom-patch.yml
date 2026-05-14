@@ -8,6 +8,18 @@ on:
         default: true
 
   workflow_dispatch:
+    inputs:
+      org:
+        description: 'Which apps do you want to patch?'
+        required: true
+        default: 'All'
+        type: choice
+        options:
+          - "All"
+          - "Dolphin SDK 29"
+          - "Eden PUBG"
+          - "FCL CoD"
+          - "Geode PUBGKR"
   schedule:
     - cron: 0 0/4 * * *
 
@@ -15,6 +27,7 @@ jobs:
   Dolphin:
     permissions: write-all
     runs-on: ubuntu-latest
+    if: ${{ inputs.org == 'Dolphin SDK 29' || inputs.org == 'All' || github.event_name == 'schedule' }}
     steps:
       - uses: actions/setup-java@v5
         with:
@@ -61,6 +74,7 @@ jobs:
   Eden:
    permissions: write-all
    runs-on: ubuntu-latest
+   if: ${{ inputs.org == 'Eden PUBG' || inputs.org == 'All' || github.event_name == 'schedule' }}
    steps:
       - uses: actions/setup-java@v5
         with:
@@ -96,6 +110,7 @@ jobs:
   FCL:
    permissions: write-all
    runs-on: ubuntu-latest
+   if: ${{ inputs.org == 'FCL CoD' || inputs.org == 'All' || github.event_name == 'schedule'   }}
    steps:
       - uses: actions/setup-java@v5
         with:
@@ -131,6 +146,7 @@ jobs:
   Geode:
    permissions: write-all
    runs-on: ubuntu-latest
+   if: ${{ inputs.org == 'Geode PUBGKR' || inputs.org == 'All' || github.event_name == 'schedule' }}
    steps:
       - uses: actions/setup-java@v5
         with:
