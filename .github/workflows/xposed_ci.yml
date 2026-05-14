@@ -6,9 +6,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  Patch-hoo-dles-proton-vpn:
-    name: Patch Piko(Instagram)
+  Patch-Revenge-Discord:
+    name: Patch Revenge(Discord)
     uses: ./.github/workflows/manual-patch.yml
     with:
-      org: "hoo-dles Proton VPN"
+      org: "Revenge Discord"
 
