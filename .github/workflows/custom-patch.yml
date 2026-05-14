@@ -135,7 +135,7 @@ jobs:
       - name: Download and Patch Geode to PUBGKR
         run: |
           echo "${{ secrets.KEYSTORE_P12 }}" | base64 --decode > ks-p12.keystore
-          bash src/build/custom.sh fcl
+          bash src/build/custom.sh geode
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
@@ -145,7 +145,7 @@ jobs:
         uses: ncipollo/release-action@v1.21.0
         with:
          artifacts: |
-          ./geode-pubg.apk
+          ./geode-pubgkr.apk
          name: Geode-PUBGKR
          tag: Geode-PUBGKR
          bodyFile: build.log
