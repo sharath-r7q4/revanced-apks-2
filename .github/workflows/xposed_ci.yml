@@ -11,4 +11,5 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Revenge Discord"
+    secrets: inherit
 

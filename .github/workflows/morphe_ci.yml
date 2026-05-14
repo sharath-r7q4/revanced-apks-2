@@ -78,6 +78,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "Morphe"
+    secrets: inherit
   Patch-Piko-X:
     name: Patch Piko(X)
     needs: check
@@ -85,6 +86,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "piko X"
+    secrets: inherit
   Patch-Piko-Instagram:
     name: Patch Piko(Instagram)
     needs: check
@@ -92,6 +94,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "piko Instagram"
+    secrets: inherit
   Patch-hoo-dles-prime-video:
     name: Patch Piko(Instagram)
     needs: check
@@ -99,6 +102,7 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "hoo-dles Prime Video"
+    secrets: inherit
   Patch-hoo-dles-proton-vpn:
     name: Patch Piko(Instagram)
     needs: check
@@ -106,4 +110,5 @@ jobs:
     uses: ./.github/workflows/manual-patch.yml
     with:
       org: "hoo-dles Proton VPN"
+    secrets: inherit
       
