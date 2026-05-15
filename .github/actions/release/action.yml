@@ -18,6 +18,6 @@ runs:
         artifacts: |
           ./release/*.apk
         name: "Get APKs"
-        tag: "All"
+        tag: "all"
         bodyFile: ${{ github.workspace }}-CHANGELOG.txt
         allowUpdates: tru
