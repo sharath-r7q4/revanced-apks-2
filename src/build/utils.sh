@@ -3,10 +3,15 @@
 mkdir ./release ./download
 
 #Setup pup for download apk files
-echo -e "\e[32m[+] Setting up pup for downloading apks\e[0m"
-wget -q -O ./pup.zip https://github.com/ericchiang/pup/releases/download/v0.4.0/pup_v0.4.0_linux_amd64.zip
-unzip "./pup.zip" -d "./" > /dev/null 2>&1
-pup="./pup"
+if [ $OSTYPE == "cygwin" ]; then
+    echo "[-] Windows detected, using pup.exe"
+	pup="./pup.exe"
+elif [ $(uname -m) == "aarch64" ]; then
+	echo "[-] ARM64 architecture detected, using pup-arm64"s
+	pup="./pup-arm64"
+else
+	pup="./pup"
+fi
 #Setup APKEditor for install combine split apks
 echo -e "\e[32m[+] Setting up APKEditor for combining apks\e[0m"
 wget -q $(curl -fsSL https://api.github.com/repos/REAndroid/APKEditor/releases/latest | jq -r '.assets[0].browser_download_url') -O APKEditor.jar
@@ -70,7 +75,7 @@ dl_gh() {
               name=$(basename "$url")
               wget -q -O "$name" "$url"
 			  release_name=$(gh api repos/$owner/$repo/releases | jq .[0].name)
-              green_log "[+] Downloading $name from $owner - $release_name"
+              green_log "[+] Downloading $name from $owner"
             fi
           fi
         fi
@@ -93,8 +98,9 @@ dl_gh() {
             if [[ "$3" == "latest" && "$names" == *dev* ]]; then
               continue
             fi
-            green_log "[+] Downloading $names from $2 - $release_name"
-            wget -q -O "$names" $url
+			names=$(echo "$names" | tr -d '\r')
+            green_log "[+] Downloading $names from $2"
+            wget -q  $url -O "$names"
           fi
         done
     done

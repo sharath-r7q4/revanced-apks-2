@@ -1,0 +1,10 @@
+*.apk*
+build/*
+release/*
+temp/*
+*-src/*
+*cli*.jar
+*.rvp
+*.mpp
+APKEditor.jar
+*temp*files*
