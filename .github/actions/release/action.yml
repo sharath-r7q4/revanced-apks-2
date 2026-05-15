@@ -20,4 +20,4 @@ runs:
         name: "Get APKs"
         tag: "all"
         bodyFile: ${{ github.workspace }}-CHANGELOG.txt
-        allowUpdates: tru
+        allowUpdates: true
