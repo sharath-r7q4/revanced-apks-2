@@ -59,8 +59,6 @@ jobs:
         id: release
         if: steps.check-gh.outputs.internet_error == '0'
         uses: ./.github/actions/release
-        with:
-         release_name: "YouTube-Morphe"
   patch_piko_twitter:
     name: Patch Piko (X)
     if: ${{ github.event.inputs.org == 'piko X' || inputs.org == 'piko X' || inputs.org == 'all' }}
@@ -92,8 +90,6 @@ jobs:
         id: release
         if: steps.check-gh.outputs.internet_error == '0'
         uses: ./.github/actions/release
-        with:
-         release_name: "X-piko"
   patch_piko_instagram:
     name: Patch Piko (Instagram)
     if: ${{ github.event.inputs.org == 'piko Instagram' || inputs.org == 'piko Instagram' || inputs.org == 'all' }}
@@ -126,8 +122,6 @@ jobs:
         id: release
         if: steps.check-gh.outputs.internet_error == '0'
         uses: ./.github/actions/release
-        with:
-         release_name: "Instagram-piko"
       
   patch_hoo-dles_protonvpn:
     name: Patch hoo-dles(ProtonVPN)
@@ -161,8 +155,6 @@ jobs:
         id: release
         if: steps.check-gh.outputs.internet_error == '0'
         uses: ./.github/actions/release
-        with:
-         release_name: "Proton-VPN-hoo-dles"
 
   patch_hoo-dles_prime-video:
     name: Patch hoo-dles(Prime Video)
@@ -197,8 +189,6 @@ jobs:
         id: release
         if: steps.check-gh.outputs.internet_error == '0'
         uses: ./.github/actions/release
-        with:
-         release_name: "Prime-Video-hoo-dles"
 
   patch_binarymend_symfonium:
     name: Patch binarymend(Symfonium)
@@ -233,8 +223,6 @@ jobs:
         id: release
         if: steps.check-gh.outputs.internet_error == '0'
         uses: ./.github/actions/release
-        with:
-         release_name: "binarymend-Symfonium"
 
   patch_revenge_discord:
     name: Patch Revenge Discord
@@ -269,5 +257,3 @@ jobs:
         id: release
         if: steps.check-gh.outputs.internet_error == '0'
         uses: ./.github/actions/release
-        with:
-         release_name: "Discord-Revenge"

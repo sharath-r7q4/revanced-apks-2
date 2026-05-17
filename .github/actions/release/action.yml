@@ -1,8 +1,5 @@
 name: Releasing APK files
 description: "a"
-inputs:
-  release_name:
-    required: true
 runs:
   using: "composite"
   steps:

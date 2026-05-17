@@ -51,6 +51,16 @@ geode() {
     sign geode-patched.apk ./release/$GEODE_NAME-pubgkr.apk
 }
 
+winlator() {
+    WINLATOR_APK_URL=$(curl -fSL https://api.github.com/repos/StevenMXZ/Winlator-Ludashi/releases/latest | jq -r '.assets[] | select(.name | endswith("build.apk")) | .browser_download_url')
+    WINLATOR_NAME=$(basename "$WINLATOR_APK_URL" .apk)
+    curl -L "$WINLATOR_APK_URL" -o winlator-orig.apk
+    java -jar APKEditor.jar d -i winlator-orig.apk -o winlator-src -t xml -dex
+    sed -i \
+-e 's/package="com\.tencent\.ig"/package="com.vng.pubgmobile"/' -e 's/com\.tencent\.ig\.tileprovider/com.vng.pubgmobile.tileprovider/' -e 's/com\.tencent\.ig\.core\.WinlatorFilesProvider/com.vng.pubgmobile.core.WinlatorFilesProvider/' -e 's/com\.tencent\.ig\.androidx-startup/com.vng.pubgmobile.androidx-startup/' winlator-src/AndroidManifest.xml
+    java -jar APKEditor.jar b -i winlator-src -o winlator-patched
+    sign winlator-patched.apk ./release/$WINLATOR_NAME-pubg.apk
+}
 case "$1" in
     dolphin)
         dolphin
@@ -63,5 +73,8 @@ case "$1" in
         ;;
     geode)
         geode
+        ;;
+    winlator)
+        winlator
         ;;
 esac

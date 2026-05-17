@@ -19,7 +19,7 @@ on:
           - "Eden PUBG"
           - "FCL CoD"
           - "Geode PUBGKR"
-
+          - "Winlator PUBGVN"
 jobs:
   Dolphin:
     permissions: write-all
@@ -60,8 +60,6 @@ jobs:
       - name: Releasing APK files
         id: release
         uses: ./.github/actions/release
-        with:
-         release_name: "Dolphin-SDK29"
   Eden:
    permissions: write-all
    runs-on: ubuntu-latest
@@ -92,8 +90,6 @@ jobs:
       - name: Releasing APK files
         id: release
         uses: ./.github/actions/release
-        with:
-         release_name: "Eden-PUBG"
   FCL:
    permissions: write-all
    runs-on: ubuntu-latest
@@ -123,8 +119,6 @@ jobs:
       - name: Releasing APK files
         id: release
         uses: ./.github/actions/release
-        with:
-         release_name: "FCL-CoD"
 
   Geode:
    permissions: write-all
@@ -154,6 +148,34 @@ jobs:
       - name: Releasing APK files
         id: release
         uses: ./.github/actions/release
+
+  Winlator:
+    permissions: write-all
+    runs-on: ubuntu-latest
+    if: ${{ inputs.org == 'Winlator PUBGVN' || github.event.inputs.org == 'Winlator PUBGVN' || inputs.org == 'All' }}
+    steps:
+      - uses: actions/setup-java@v5
         with:
-         release_name: "Geode-PUBGKR"
+          distribution: "zulu"
+          java-version: "21"
+
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - name: Download and Patch Winlator to PUBG VN
+        run: |
+          echo "${{ secrets.KEYSTORE_P12 }}" | base64 --decode > ks-p12.keystore
+          bash src/build/custom.sh winlator
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          KEYSTORE_PASS: ${{ secrets.KEYSTORE_PASS }}
+          KEYSTORE_ALIAS: ${{ secrets.KEYSTORE_ALIAS }}
+          GITHUB_REPOSITORY: $GITHUB_REPOSITORY
+
+      - name: Releasing APK files
+        id: release
+        uses: ./.github/actions/release
          
