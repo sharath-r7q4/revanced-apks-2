@@ -58,7 +58,7 @@ winlator() {
     java -jar APKEditor.jar d -i winlator-orig.apk -o winlator-src -t xml -dex
     sed -i \
 -e 's/package="com\.tencent\.ig"/package="com.vng.pubgmobile"/' -e 's/com\.tencent\.ig\.tileprovider/com.vng.pubgmobile.tileprovider/' -e 's/com\.tencent\.ig\.core\.WinlatorFilesProvider/com.vng.pubgmobile.core.WinlatorFilesProvider/' -e 's/com\.tencent\.ig\.androidx-startup/com.vng.pubgmobile.androidx-startup/' winlator-src/AndroidManifest.xml
-    java -jar APKEditor.jar b -i winlator-src -o winlator-patched
+    java -jar APKEditor.jar b -i winlator-src -o winlator-patched.apk
     sign winlator-patched.apk ./release/$WINLATOR_NAME-pubg.apk
 }
 case "$1" in
